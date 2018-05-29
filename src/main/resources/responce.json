@@ -1,0 +1,122 @@
+{
+  "title": "Qos Measuring",
+  "questions": [
+    {
+      "orderNumber": 0,
+      "title": "SERVQUAL",
+      "type": "matrixdropdown",
+      "choices": [],
+      "columns": [
+        {
+          "orderNumber": 0,
+          "title": "Удовлетворенность",
+          "choices": [
+            {
+              "id": 1,
+              "value": "1"
+            },
+            {
+              "id": 2,
+              "value": "2"
+            },
+            {
+              "id": 3,
+              "value": "3"
+            },
+            {
+              "id": 4,
+              "value": "4"
+            },
+            {
+              "id": 5,
+              "value": "5"
+            }
+          ],
+          "type": "radiogroup",
+          "name": 1
+        },
+        {
+          "orderNumber": 0,
+          "title": "Важность",
+          "choices": [
+            {
+              "id": 6,
+              "value": "1"
+            },
+            {
+              "id": 7,
+              "value": "2"
+            },
+            {
+              "id": 8,
+              "value": "3"
+            },
+            {
+              "id": 9,
+              "value": "4"
+            },
+            {
+              "id": 10,
+              "value": "5"
+            }
+          ],
+          "type": "radiogroup",
+          "name": 2
+        }
+      ],
+      "rows": [
+        {
+          "orderNumber": 0,
+          "text": "Скорость доступа",
+          "value": 1
+        },
+        {
+          "orderNumber": 0,
+          "text": "Роуминг",
+          "value": 2
+        }
+      ],
+      "name": 1
+    },
+    {
+      "orderNumber": 0,
+      "title": "Age",
+      "type": "dropdown",
+      "choices": [
+        {
+          "id": 11,
+          "value": "1"
+        },
+        {
+          "id": 12,
+          "value": "2"
+        },
+        {
+          "id": 13,
+          "value": "3"
+        },
+        {
+          "id": 14,
+          "value": "4"
+        },
+        {
+          "id": 15,
+          "value": "5"
+        }
+      ],
+      "columns": [],
+      "rows": [],
+      "name": 3
+    },
+    {
+      "orderNumber": 0,
+      "title": "Имя",
+      "type": "text",
+      "choices": [],
+      "columns": [],
+      "rows": [],
+      "name": 2
+    }
+  ],
+  "name": 1
+}

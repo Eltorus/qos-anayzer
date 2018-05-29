@@ -1,0 +1,45 @@
+{
+  "name": 1,
+  "title": "Qos Measuring",
+  "questions": [
+    {
+      "type": "matrixdropdown",
+      "name": 1,
+      "title": "SERVQUAL",
+      "columns": [
+        {
+          "name": 1,
+          "title": "Удовлетворенность",
+          "choices": ["1", "2", "3", "4", "5"],
+          "cellType": "radiogroup"
+        },
+        {
+          "name": 2,
+          "title": "Важность",
+          "choices": ["1", "2", "3", "4", "5"],
+          "cellType": "radiogroup"
+        }
+      ],
+      "rows": [
+        {
+          "value": "1",
+          "text": "Скорость доступа"
+        }, {
+          "value": "2",
+          "text": "Роуминг"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "2",
+      "title": "Имя"
+    },
+    {
+      "name": "3",
+      "type": "dropdown",
+      "title": "Age",
+      "choices": ["10", "20", "30", "40", "50"]
+    }
+  ]
+}
