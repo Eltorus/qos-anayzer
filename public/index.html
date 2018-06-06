@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Qos Analyzer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-debug.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/survey-knockout/survey.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./ii.css" />
+
+</head>
+
+<body>
+    <div class="sv_main sv_frame sv_default_css">
+        <div class="sv_custom_header"></div>
+        <div class="sv_container">
+            <div class="sv_header">
+                <h3>Средство оценки качества услуг связи</h3>
+                <p>Выберите опрос для прохождения</p>
+            </div>
+            <div class="sv_body">
+                <div id="surveys-list" class="surveys-list">
+                    <section>
+                        <button data-bind="click: function() { createSurvey('NewSurvey' + Date.now(), loadSurveys); }">Добавить опрос</button>
+                    </section>
+                    <table class="table table-striped">
+                        <tbody>
+                            <!-- ko foreach: availableSurveys -->
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td>
+                                    <a class="sv_button_link" data-bind="attr: { href: 'survey.html?id=' + ko.unwrap(id) }">Пройти опрос</a>
+                                    <a class="sv_button_link" data-bind="attr: { href: 'editor.html?id=' + ko.unwrap(id)+'&name='+ko.unwrap(name) }">Редактировать</a>
+                                    <a class="sv_button_link" data-bind="attr: { href: 'results.html?id=' + ko.unwrap(id) }">Результаты</a>
+                                    <span class="sv_button_link sv_button_delete" data-bind="click: function() { $parent.deleteSurvey(ko.unwrap(id), $parent.loadSurveys); }">Удалить</span>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="index.js"></script>
+
+</html>
