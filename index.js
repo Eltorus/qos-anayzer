@@ -75,6 +75,42 @@ app.post("/post", function(req, res) {
   db.postResults(postId, surveyResult, function(result) {
     sendJsonResult(res, result.json);
   });
+
+  db.getSurvey(postId, function(result) {
+    var survey = result;
+    db.getServqual(postId, function(result) {
+ for (var i in survey.questions) {
+    var question = survey.questions[i];
+    if (question != null && question.type == "matrixdropdown") {
+            var servqual = {};
+            for(var i in surveyResult[i.name]) {
+              var row = surveyResult[i.name][i];
+              var propertyName = "";
+              switch(row["importance"]) {
+              case '1':
+              propertyName = "w1";
+              break;
+              case '2':
+              propertyName = "w2";
+              break;
+              case '3':
+              propertyName = "w3";
+              break;
+              case '4':
+              propertyName = "w4";
+              break;
+              case '5':
+              propertyName = "w5";
+              break;
+              servuqal[i][propertyName] = row["importance"];
+              servuqal[i]["contentment"]["count"]++;
+              servuqal[i]["contentment"]["value"] = (servuqal[i]["contentment"]["value"] +  row["contentment"])/ servuqal[i]["contentment"]["count"];
+            }
+          }
+        }
+      }
+    };
+  });
 });
 
 app.get("/delete", function(req, res) {

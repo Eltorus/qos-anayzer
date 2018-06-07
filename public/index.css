@@ -88,7 +88,7 @@ section {
 }
 
 .sv_body {
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .fork_me_on_github img {
@@ -109,3 +109,35 @@ section {
   display: inline-block;
   margin: 15px auto;
 }
+
+.sv_window {
+  height: 100%;
+  width: 70%;
+  overflow: scroll;
+}
+
+.closeSurveyResult {
+  display: none;
+  background-color: red;
+}
+
+body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Lato", sans-serif
+  }
+  
+  .w3-bar,
+  h1,
+  button {
+    font-family: "Montserrat", sans-serif
+  }
+  
+  .fa-anchor,
+  .fa-coffee {
+    font-size: 200px
+  }

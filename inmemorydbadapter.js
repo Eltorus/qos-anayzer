@@ -51,6 +51,18 @@ function InMemoryDBAdapter(session) {
     callback(results);
   }
 
+   function getServqual(postId, callback) {
+    var table = getTable("servqual");
+    var results = table
+      .filter(function(item) {
+        return item.postid === postId;
+      })
+      .map(function(item) {
+        return item.json;
+      });
+    callback(results);
+  }
+
   function deleteSurvey(surveyId, callback) {
     var table = getTable("surveys");
     var result = table.filter(function(item) {

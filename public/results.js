@@ -65,12 +65,20 @@ function SurveyManager(baseUrl, accessKey) {
       var windowSurvey = new Survey.SurveyWindow(json);
       windowSurvey.survey.mode = "display";
       windowSurvey.survey.title = self.surveyId;
-      windowSurvey.show();
+      
 
       $(document).on("click", "#resultsTable td", function(e) {
         var row_object = table.row(this).data();
         windowSurvey.survey.data = row_object;
         windowSurvey.isExpanded = true;
+        windowSurvey.show();
+        $(".closeSurveyResult").css({'display': 'inline-block'});
+      });
+
+      $(document).on("click", ".closeSurveyResult", function(e) {
+        windowSurvey.isExpanded = false;
+        windowSurvey.hide();
+        $(".closeSurveyResult").css({'display': 'none'});
       });
     };
     xhr.send();
