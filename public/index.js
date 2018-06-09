@@ -36,7 +36,7 @@ function SurveyManager(baseUrl, accessKey) {
   };
 
   self.deleteSurvey = function(id, onDelete) {
-    if (confirm("Are you sure?")) {
+    if (confirm("Вы уверены что хотите удалить выбранную анкету?")) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", baseUrl + "/delete?accessKey=" + accessKey + "&id=" + id);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -48,6 +48,19 @@ function SurveyManager(baseUrl, accessKey) {
       window.location = "/";
     }
   };
+
+    self.getServqual = function(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", baseUrl + "/servqual?accessKey=" + accessKey + "&id=" + id);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function() {
+                var result = xhr.response;
+                alert(JSON.stringify(result));
+            };
+            xhr.send();
+            window.location = "/";
+
+    };
 
   self.loadSurveys();
 }

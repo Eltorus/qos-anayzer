@@ -119,6 +119,17 @@ section {
 .closeSurveyResult {
   display: none;
   background-color: red;
+  color: white;
+  font-size: 0.85em;
+  font-weight: bold;
+  line-height: 2em;
+  border: none;
+  min-width: 100px;
+  cursor: pointer;
+  padding: 0 2em;
+  border-radius: 2px;
+  margin-right: 40px;
+  float: right;
 }
 
 body,
