@@ -98,14 +98,35 @@ var surveys = {
 
 var results = {
     "Оценка услуг мобильной связи": [
-        '{"date": "Sat Jun 09 2018 14:44:19 GMT+0300 (Belarus Standard Time)", 1":{"4":{"importance":"4","contentment":"4"},"5":{"importance":"2","contentment":"3"},"6":{"importance":"4","contentment":"4"},"7":{"importance":"2","contentment":"5"},"8":{"importance":"4","contentment":"4"},"9":{"3":"3"},"10":{"2":"5","3":"5"}},"7":"Инженер","8":"Минская"}'
+        '{ "date": "0.2018", 1":{"4":{"importance":"4","contentment":"4"},"5":{"importance":"2","contentment":"3"},"6":{"importance":"4","contentment":"4"},"7":{"importance":"2","contentment":"5"},"8":{"importance":"4","contentment":"4"},"9":{"3":"3"},"10":{"2":"5","3":"5"}},"7":"Инженер","8":"Минская"}'
     ],
     "Оценка домашнего интернета": [
-        '{"date": "Sat Jun 09 2018 14:44:19 GMT+0300 (Belarus Standard Time)" ,"5":{"6":{"importance":"4","contentment":"3"},"7":{"importance":"3","contentment":"2"},"8":{"importance":"5","contentment":"5"},"101":{"importance":"1","contentment":"4"},"102":{"importance":"2","contentment":"3"}},"7":"Студент","8":"22"}'
+        '{ "date": "0.2018", "5":{"6":{"importance":"4","contentment":"3"},"7":{"importance":"3","contentment":"2"},"8":{"importance":"5","contentment":"5"},"101":{"importance":"1","contentment":"4"},"102":{"importance":"2","contentment":"3"}},"7":"Студент","8":"22"}'
     ]
 };
 
-var servqual = {};
+var servqual = {
+    "Оценка услуг мобильной связи": {
+        "5.2018": {
+            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
+            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
+            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa17": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
+            "aa18": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 16}},
+            "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa110": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 20}}
+        },
+        "4.2018": {
+            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
+            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
+            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa17": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
+            "aa18": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 16}},
+            "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa110": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 20}}
+        }
+    }
+};
 
 module.exports = {
     surveys: surveys,

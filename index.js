@@ -75,11 +75,14 @@ app.post("/post", function (req, res) {
     var surveyResult = req.body.surveyResult;
     console.log(JSON.stringify(surveyResult));
     db.getSurvey(postId, function (survey) {
-        db.getServqual(postId, function (result) {
+        db.getServqual(postId, new Date().getMonth() + "." + new Date().getFullYear(), function (result) {
             for (var i in survey.questions) {
                 var question = survey.questions[i];
-                if (question != null && question.type == "matrixdropdown") {
-                    var servqual  = result;
+                if (question != null && question.type === "matrixdropdown") {
+                    var servqual;
+                    if (result) {
+                        servqual = result.json;
+                    }
                     if (typeof servqual === 'undefined' || servqual == null) {
                         servqual = {};
                     }
@@ -115,19 +118,19 @@ app.post("/post", function (req, res) {
                             servqual[k].contentment.count = 0;
                             servqual[k].contentment.value = 0;
                         }
-                    servqual[k][propertyName] += 1;
-                    servqual[k].contentment.count += 1;
-                    servqual[k].contentment.value += parseInt(row["contentment"]);
+                        servqual[k][propertyName] += 1;
+                        servqual[k].contentment.count += 1;
+                        servqual[k].contentment.value += parseInt(row["contentment"]);
+                    }
+                    console.log("Servqual: " + JSON.stringify(servqual));
+                    db.saveServqual(postId, servqual, new Date().getMonth() + "." + new Date().getFullYear());
                 }
-                console.log("Servqual: " + JSON.stringify(servqual));
-                db.saveServqual(postId, servqual);
             }
-        }
+        });
     });
-});
-db.postResults(postId, surveyResult, function (postResult) {
-    sendJsonResult(res, postResult.json);
-});
+    db.postResults(postId, surveyResult, function (postResult) {
+        sendJsonResult(res, postResult.json);
+    });
 })
 ;
 
@@ -135,24 +138,32 @@ app.get("/servqual", function (req, res) {
     var db = getDBAdapter(req);
     var surveyId = req.query["id"];
     db.getSurvey(surveyId, function (survey) {
-        db.getServqual(surveyId, function (result) {
+        db.getServquals(surveyId, function (result) {
             var resultServqual = {};
-            for (var i in survey.questions) {
-                var question = survey.questions[i];
-                if (question != null && question.type == "matrixdropdown") {
-                    var servqual = result;
-                    if (typeof servqual === 'undefined' || servqual == null) {
-                        servqual = {};
-                    } else {
-                        for (var k in question.rows) {
-                            var row = question.rows[k];
-                            resultServqual[row.text] = {};
-                            resultServqual[row.text].importance = {};
-                            resultServqual[row.text].contentment = {};
-                            resultServqual[row.text].importance = Math.abs((servqual[row.value]["w5"] + 0.5 * servqual[row.value]["w4"] - 0.5 * servqual[row.value]["w2"] - servqual[row.value]["w1"]) /
-                                (servqual[row.value]["w5"] + servqual[row.value]["w4"] + servqual[row.value]["w3"] + servqual[row.value]["w2"] + servqual[row.value]["w1"]));
-                            resultServqual[row.text].contentment = servqual[row.value].contentment.value / servqual[row.value].contentment.count;
-                        }
+            if (result) {
+                console.log("/servqual : " + JSON.stringify(result));
+                for (var i in survey.questions) {
+                    var question = survey.questions[i];
+                    if (question != null && question.type === "matrixdropdown") {
+                        Object.keys(result).forEach(function (date) {
+                            resultServqual[date] = {};
+                            if (result !== undefined) {
+                                var servqual = result[date];
+                            }
+                            if (typeof servqual === 'undefined' || servqual == null) {
+                                servqual = {};
+                            } else {
+                                for (var k in question.rows) {
+                                    var row = question.rows[k];
+                                    resultServqual[date][row.text] = {};
+                                    resultServqual[date][row.text].importance = {};
+                                    resultServqual[date][row.text].contentment = {};
+                                    resultServqual[date][row.text].importance = Math.abs((servqual[row.value]["w5"] + 0.5 * servqual[row.value]["w4"] - 0.5 * servqual[row.value]["w2"] - servqual[row.value]["w1"]) /
+                                        (servqual[row.value]["w5"] + servqual[row.value]["w4"] + servqual[row.value]["w3"] + servqual[row.value]["w2"] + servqual[row.value]["w1"]));
+                                    resultServqual[date][row.text].contentment = servqual[row.value].contentment.value / servqual[row.value].contentment.count;
+                                }
+                            }
+                        });
                     }
                 }
             }
