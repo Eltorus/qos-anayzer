@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./font-awesome.min.css">
+<title>Matrix with multiple choices for every column - Matrix Dropdown question, jQuery Survey Library Example</title>
+<head>
+    <meta charset="utf-8"/>
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="./bootstrap.min.css"/>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script type="text/javascript" src="./jquery.dataTables.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./knockout-debug.js"></script>
+    <script src="./survey.ko.js"></script>
+    <link rel="stylesheet" href="./survey.css"/>
+    <link rel="stylesheet" href="./jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="./index.css"/>
+    <link rel="stylesheet" href="./w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="./font-awesome.min.css">
+    <script src="./Chart.min.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-white" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white" onclick="window.location = '/'">На главную</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-grey">Личный кабинет</a>
+    </div>
+</div>
+<br/><br/><br/>
+<div class="container">
+    <canvas id="myChart"></canvas>
+    <canvas id="myPieChart"></canvas>
+</div>
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./chrt.js"></script>
+<script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</body>
+
+</html>

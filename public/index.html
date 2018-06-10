@@ -36,8 +36,8 @@
                                     <a class="sv_button_link" data-bind="attr: { href: 'survey.html?id=' + ko.unwrap(id) }">Пройти опрос</a>
                                     <a class="sv_button_link" data-bind="attr: { href: 'editor.html?id=' + ko.unwrap(id)+'&name='+ko.unwrap(name) }">Редактировать</a>
                                     <a class="sv_button_link" data-bind="attr: { href: 'results.html?id=' + ko.unwrap(id) }">Результаты</a>
+                                    <a class="sv_button_link" data-bind="attr: { href: 'admin.html?id=' + ko.unwrap(id) }">Servqual</a>
                                     <span class="sv_button_link sv_button_delete" data-bind="click: function() { $parent.deleteSurvey(ko.unwrap(id), $parent.loadSurveys); }">Удалить</span>
-                                    <span class="sv_button_link sv_button_delete" data-bind="click: function() { $parent.getServqual(ko.unwrap(id)); }">Servqual</span>
                                 </td>
                             </tr>
                             <!-- /ko -->

@@ -71,22 +71,19 @@ app.post("/changeJson", function (req, res) {
 app.post("/post", function (req, res) {
     var db = getDBAdapter(req);
     var postId = req.body.postId;
-    console.log("postId :   " + postId);
     var surveyResult = req.body.surveyResult;
-    console.log(JSON.stringify(surveyResult));
+    var surveyResultNonEscaped = JSON.parse(surveyResult);
+    console.log("/surveyResult : " + JSON.stringify(surveyResultNonEscaped));
+    var date = new Date().getMonth() + "." + new Date().getFullYear()
     db.getSurvey(postId, function (survey) {
-        db.getServqual(postId, new Date().getMonth() + "." + new Date().getFullYear(), function (result) {
+        db.getServqual(postId, date, function (result) {
             for (var i in survey.questions) {
                 var question = survey.questions[i];
                 if (question != null && question.type === "matrixdropdown") {
-                    var servqual;
+                    var servqual = {};
                     if (result) {
-                        servqual = result.json;
+                        servqual = result;
                     }
-                    if (typeof servqual === 'undefined' || servqual == null) {
-                        servqual = {};
-                    }
-                    var surveyResultNonEscaped = JSON.parse(surveyResult);
                     for (var k in surveyResultNonEscaped[question.name]) {
                         var row = surveyResultNonEscaped[question.name][k];
                         var propertyName = "";
@@ -107,32 +104,34 @@ app.post("/post", function (req, res) {
                                 propertyName = "w5";
                                 break;
                         }
-                        if (typeof servqual[k] === 'undefined') {
-                            servqual[k] = {};
-                            servqual[k].w1 = 0;
-                            servqual[k].w2 = 0;
-                            servqual[k].w3 = 0;
-                            servqual[k].w4 = 0;
-                            servqual[k].w5 = 0;
-                            servqual[k].contentment = {};
-                            servqual[k].contentment.count = 0;
-                            servqual[k].contentment.value = 0;
+                        if (servqual[k] === undefined) {
+                            servqual[k] = {
+                                w1: 0,
+                                w2: 0,
+                                w3: 0,
+                                w4: 0,
+                                w5: 0,
+                                contentment: {
+                                    count: 0,
+                                    value: 0
+                                }
+                            };
                         }
                         servqual[k][propertyName] += 1;
                         servqual[k].contentment.count += 1;
                         servqual[k].contentment.value += parseInt(row["contentment"]);
                     }
                     console.log("Servqual: " + JSON.stringify(servqual));
-                    db.saveServqual(postId, servqual, new Date().getMonth() + "." + new Date().getFullYear());
+                    db.saveServqual(postId, servqual, date);
                 }
             }
         });
     });
-    db.postResults(postId, surveyResult, function (postResult) {
-        sendJsonResult(res, postResult.json);
+    date = new Date();
+    db.postResults(postId, surveyResultNonEscaped, date, function (postResult) {
+        sendJsonResult(res, postResult[postId][date]);
     });
-})
-;
+});
 
 app.get("/servqual", function (req, res) {
     var db = getDBAdapter(req);
@@ -141,7 +140,6 @@ app.get("/servqual", function (req, res) {
         db.getServquals(surveyId, function (result) {
             var resultServqual = {};
             if (result) {
-                console.log("/servqual : " + JSON.stringify(result));
                 for (var i in survey.questions) {
                     var question = survey.questions[i];
                     if (question != null && question.type === "matrixdropdown") {
@@ -169,6 +167,52 @@ app.get("/servqual", function (req, res) {
             }
             sendJsonResult(res, resultServqual);
         });
+    });
+});
+
+app.get("/statistic", function (req, res) {
+    var db = getDBAdapter(req);
+    var surveyId = req.query["id"];
+    var locations = ["Минская", "Витебская", "Брестская", "Гродненская", "Гомельская", "Могилевская"];
+    db.getResults(surveyId, function (result) {
+        var resultStatistic = {
+            age: [0, 0, 0, 0, 0],
+            location: [0, 0, 0, 0, 0, 0]
+        };
+        if (result) {
+            console.log("/servqual : " + JSON.stringify(result));
+            Object.keys(result).forEach(function (i) {
+            Object.keys(result[i]).forEach(function (date) {
+                console.log("result[i] : " + JSON.stringify(result[i]));
+                var age = parseInt(result[i][date].age);
+                var index;
+                if (age < 20) {
+                    index = 0;
+                }
+                if (age >= 20 || age < 30) {
+                    index = 1;
+                }
+                if (age >= 30 || age < 40) {
+                    index = 2;
+                }
+                if (age >= 40 || age < 50) {
+                    index = 3;
+                }
+                if (age >= 50) {
+                    index = 4;
+                }
+                resultStatistic.age[index] += 1;
+                var location = result[i][date].location;
+                for (j = 0, len = locations.length; j < len; ++j) {
+                    if (location === locations[j]) {
+                        resultStatistic.location[j] += 1;
+                    }
+                }
+            });
+            });
+        }
+        console.log("/resultStatistic : " + JSON.stringify(resultStatistic));
+        sendJsonResult(res, resultStatistic);
     });
 });
 

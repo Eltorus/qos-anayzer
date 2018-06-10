@@ -31,42 +31,47 @@ function InMemoryDBAdapter(session) {
         callback(newObj);
     }
 
-    function postResults(postId, json, callback) {
+    function postResults(postId, json, date, callback) {
         var table = getTable("results");
-        var newObj = {
-            postid: postId,
-            date: new Date().getMonth() + "." + new Date().getFullYear(),
-            json: json
-        };
-        table.push(newObj);
-        callback(newObj);
+        var result = table.filter(function (item) {
+            return item[postId] !== undefined;
+        })[0];
+        console.log("postResults : " + JSON.stringify(result));
+        if (!!result) {
+            result[postId][date] = json;
+        } else {
+            result = {
+                [postId]: {
+                    [date]: json
+                }
+            };
+            table.push(result);
+        }
+        callback && callback(result);
     }
 
     function getResults(postId, callback) {
         var table = getTable("results");
+        if (Object.keys(table).length <= 0) {
+            Object.keys(demoData.results).forEach(function (surveyId) {
+                Object.keys(demoData.results[surveyId]).forEach(function (date) {
+                    postResults(surveyId, demoData.results[surveyId][date],date);
+                });
+            });
+        }
         var results = table
             .filter(function (item) {
-                return item.postid === postId;
-            })
-            .map(function (item) {
-                return item.json;
+                return item[postId] !== undefined;
+            }).map(function (item) {
+                return item[postId];
             });
+        console.log("getResults :" + JSON.stringify(results));
         callback(results);
     }
 
     function getServqual(postId, date, callback) {
-        var result = getTable("servqual");
-        console.log("Get Result : " + JSON.stringify(result));
-        Object.keys(result).forEach(function (surveyId) {
-            if (surveyId === postId && result[postId].date !== undefined && result[postId].date === date) {
-                var servqual = {};
-                servqual = {
-                    date: result[postId].date,
-                    json: result[postId].json
-                };
-                console.log("Get Result : " + JSON.stringify(servqual));
-                callback(servqual);
-            }
+        getServquals(postId, function (result) {
+            callback(result[date]);
         });
     }
 
@@ -84,8 +89,7 @@ function InMemoryDBAdapter(session) {
                 return item[postId] !== undefined;
             })[0];
         var servqual = {};
-        console.log("Get Results : " + JSON.stringify(result));
-        if (result[postId] !== undefined) {
+        if (result && result[postId] !== undefined) {
             servqual = result[postId];
         }
         console.log("Get Result output : " + JSON.stringify(servqual));
@@ -96,11 +100,8 @@ function InMemoryDBAdapter(session) {
     function saveServqual(id, json, date, callback) {
         var table = getTable("servqual");
         var result = table.filter(function (item) {
-            console.log("___________item : " + JSON.stringify(item));
-            console.log("CONDIT: " + item[id][date] !== undefined);
             return item[id] !== undefined;
         })[0];
-        console.log("RESULT: " + JSON.stringify(result));
         if (!!result) {
             result[id][date] = json;
         } else {
@@ -111,7 +112,7 @@ function InMemoryDBAdapter(session) {
             };
             table.push(result);
         }
-        console.log("Save Result : " + JSON.stringify(result));
+        console.log("Save Servqual : " + JSON.stringify(result));
         callback && callback(result);
     }
 
@@ -157,18 +158,8 @@ function InMemoryDBAdapter(session) {
             if (Object.keys(objects).length > 0) {
                 callback(objects);
             } else {
-                var table = getTable("results");
                 Object.keys(demoData.surveys).forEach(function (surveyId) {
-                    storeSurvey(surveyId, JSON.stringify(demoData.surveys[surveyId]));
-                    table.push.apply(
-                        table,
-                        demoData.results[surveyId].map(function (item) {
-                            return {
-                                postid: surveyId,
-                                json: item
-                            };
-                        })
-                    );
+                    storeSurvey(surveyId, demoData.surveys[surveyId]);
                 });
                 getObjectsFromStorage("surveys", callback);
             }
@@ -179,7 +170,7 @@ function InMemoryDBAdapter(session) {
         addSurvey: addSurvey,
         getSurvey: function (surveyId, callback) {
             getSurveys(function (result) {
-                callback(JSON.parse(result[surveyId].json));
+                callback(result[surveyId].json);
             });
         },
         storeSurvey: storeSurvey,

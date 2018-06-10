@@ -27,11 +27,7 @@ function SurveyManager(baseUrl, accessKey) {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
       var result = xhr.response ? JSON.parse(xhr.response) : [];
-      self.results(
-        result.map(function(r) {
-          return JSON.parse(r || "{}");
-        })
-      );
+      self.results(result);
       self.columns(
         survey.getAllQuestions().map(function(q) {
           return {

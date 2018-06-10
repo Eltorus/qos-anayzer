@@ -1,129 +1,36 @@
-[
-  {
-    "Оценка услуг мобильной связи": {
-      "5.2018": {
-        "aa14": {
-          "w1": 0,
-          "w2": 4,
-          "w3": 0,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 8
-          }
-        },
-        "aa15": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 4,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 8
-          }
-        },
-        "aa16": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 0,
-          "w4": 4,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 12
-          }
-        },
-        "aa17": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 4,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 16
-          }
-        },
-        "aa18": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 0,
-          "w4": 0,
-          "w5": 4,
-          "contentment": {
-            "count": 4,
-            "value": 16
-          }
-        },
-        "aa19": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 4,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 12
-          }
-        },
-        "aa110": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 0,
-          "w4": 0,
-          "w5": 4,
-          "contentment": {
-            "count": 4,
-            "value": 20
-          }
-        }
-      },
-      "4.2018": {
-        "aa14": {
-          "w1": 0,
-          "w2": 4,
-          "w3": 0,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 8
-          }
-        },
-        "aa15": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 4,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 8
-          }
-        },
-        "aa16": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 0,
-          "w4": 4,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 12
-          }
-        },
-        "aa17": {
-          "w1": 0,
-          "w2": 0,
-          "w3": 4,
-          "w4": 0,
-          "w5": 0,
-          "contentment": {
-            "count": 4,
-            "value": 16
-          }
-        },
-        "aa18": {
-          "w1"
+app.get("/servqual", function (req, res) {
+    var db = getDBAdapter(req);
+    var surveyId = req.query["id"];
+    db.getSurvey(surveyId, function (survey) {
+        db.getServquals(surveyId, function (result) {
+            var resultServqual = {};
+            if (result) {
+                for (var i in survey.questions) {
+                    var question = survey.questions[i];
+                    if (question != null && question.type === "matrixdropdown") {
+                        Object.keys(result).forEach(function (date) {
+                            resultServqual[date] = {};
+                            if (result !== undefined) {
+                                var servqual = result[date];
+                            }
+                            if (typeof servqual === 'undefined' || servqual == null) {
+                                servqual = {};
+                            } else {
+                                for (var k in question.rows) {
+                                    var row = question.rows[k];
+                                    resultServqual[date][row.text] = {};
+                                    resultServqual[date][row.text].importance = {};
+                                    resultServqual[date][row.text].contentment = {};
+                                    resultServqual[date][row.text].importance = Math.abs((servqual[row.value]["w5"] + 0.5 * servqual[row.value]["w4"] - 0.5 * servqual[row.value]["w2"] - servqual[row.value]["w1"]) /
+                                        (servqual[row.value]["w5"] + servqual[row.value]["w4"] + servqual[row.value]["w3"] + servqual[row.value]["w2"] + servqual[row.value]["w1"]));
+                                    resultServqual[date][row.text].contentment = servqual[row.value].contentment.value / servqual[row.value].contentment.count;
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+            sendJsonResult(res, resultServqual);
+        });
+    });
+});

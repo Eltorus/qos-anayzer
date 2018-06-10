@@ -4,6 +4,7 @@ var surveys = {
         "title": "Сотовая связь",
         "questions": [{
             "type": "matrixdropdown",
+            "isRequired": "true",
             "title": "Показатели качества услуг оператора",
             "name": "aa1",
             "columns": [{
@@ -40,12 +41,21 @@ var surveys = {
                 "value": "aa110"
             }]
         }, {
-            "name": "aa7",
+            "name": "age",
             "type": "text",
-            "title": "Укажите ваш род занятий"
+            "isRequired": "true",
+            "title": "Укажите ваш возраст",
+            "validators": [
+                {
+                    "type": "numeric",
+                    "minValue": 0,
+                    "maxValue": 150
+                }
+            ]
         }, {
-            "name": "aa8",
+            "name": "location",
             "type": "dropdown",
+            "isRequired": "true",
             "title": "Укажите область вашего проживания",
             "choices": ["Минская", "Витебская", "Брестская", "Гродненская", "Гомельская", "Могилевская"]
         }]
@@ -55,6 +65,7 @@ var surveys = {
         "title": "Домашний Интернет",
         "questions": [{
             "type": "matrixdropdown",
+            "isRequired": "true",
             "title": "Показатели качества услуг провайдера",
             "name": 5,
             "columns": [{
@@ -85,29 +96,59 @@ var surveys = {
                 "value": 8
             }]
         }, {
-            "name": 7,
-            "type": "text",
-            "title": "Укажите ваш род занятий"
+            "name": "location",
+            "type": "dropdown",
+            "isRequired": "true",
+            "title": "Укажите область вашего проживания",
+            "choices": ["Минская", "Витебская", "Брестская", "Гродненская", "Гомельская", "Могилевская"]
         }, {
-            "name": 8,
+            "name": "age",
+            "isRequired": "true",
             "type": "text",
-            "title": "Укажите ваш возраст"
+            "title": "Укажите ваш возраст",
+            "validators": [
+                {
+                    "type": "numeric",
+                    "minValue": 0,
+                    "maxValue": 150
+                }
+            ]
         }]
     }
 };
 
 var results = {
-    "Оценка услуг мобильной связи": [
-        '{ "date": "0.2018", 1":{"4":{"importance":"4","contentment":"4"},"5":{"importance":"2","contentment":"3"},"6":{"importance":"4","contentment":"4"},"7":{"importance":"2","contentment":"5"},"8":{"importance":"4","contentment":"4"},"9":{"3":"3"},"10":{"2":"5","3":"5"}},"7":"Инженер","8":"Минская"}'
-    ],
-    "Оценка домашнего интернета": [
-        '{ "date": "0.2018", "5":{"6":{"importance":"4","contentment":"3"},"7":{"importance":"3","contentment":"2"},"8":{"importance":"5","contentment":"5"},"101":{"importance":"1","contentment":"4"},"102":{"importance":"2","contentment":"3"}},"7":"Студент","8":"22"}'
-    ]
+    "Оценка услуг мобильной связи":
+        {
+            "Sun Jun 10 2018 19:57:05 GMT+0300 (Belarus Standard Time)": {
+                "1": {
+                    "4": {"importance": "4", "contentment": "4"},
+                    "5": {"importance": "2", "contentment": "3"},
+                    "6": {"importance": "4", "contentment": "4"},
+                    "7": {"importance": "2", "contentment": "5"},
+                    "8": {"importance": "4", "contentment": "4"},
+                    "9": {"3": "3"},
+                    "10": {"2": "5", "3": "5"}
+                }, "age": "20", "location": "Минская"
+            }
+        },
+    "Оценка домашнего интернета":
+        {
+            "Sun Jun 10 2018 19:57:07 GMT+0300 (Belarus Standard Time)": {
+                "5": {
+                    "6": {"importance": "4", "contentment": "3"},
+                    "7": {"importance": "3", "contentment": "2"},
+                    "8": {"importance": "5", "contentment": "5"},
+                    "101": {"importance": "1", "contentment": "4"},
+                    "102": {"importance": "2", "contentment": "3"}
+                }, "age": "35", "location": "Минская"
+            }
+        }
 };
 
 var servqual = {
     "Оценка услуг мобильной связи": {
-        "5.2018": {
+        "4.2018": {
             "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
             "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
             "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
@@ -116,7 +157,7 @@ var servqual = {
             "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 12}},
             "aa110": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 20}}
         },
-        "4.2018": {
+        "5.2018": {
             "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
             "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
             "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
