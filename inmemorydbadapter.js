@@ -1,8 +1,25 @@
 var demoData = require("./demo-surveys");
-var fs = require('fs');
-var fileSession = {};
+
 
 function InMemoryDBAdapter(session) {
+
+    function init() {
+        Object.keys(demoData.servqual).forEach(function (postId) {
+            Object.keys(demoData.servqual[postId]).forEach(function (date) {
+                saveServqual(postId, demoData.servqual[postId][date], date);
+            });
+        });
+        Object.keys(demoData.results).forEach(function (surveyId) {
+            Object.keys(demoData.results[surveyId]).forEach(function (date) {
+                postResults(surveyId, demoData.results[surveyId][date], date);
+            });
+        });
+        Object.keys(demoData.surveys).forEach(function (surveyId) {
+            storeSurvey(surveyId, demoData.surveys[surveyId]);
+        });
+        console.log("INITIALIZED")
+    }
+
     function getTable(tableName) {
         var table = session[tableName];
         if (!table) {
@@ -52,13 +69,6 @@ function InMemoryDBAdapter(session) {
 
     function getResults(postId, callback) {
         var table = getTable("results");
-        if (Object.keys(table).length <= 0) {
-            Object.keys(demoData.results).forEach(function (surveyId) {
-                Object.keys(demoData.results[surveyId]).forEach(function (date) {
-                    postResults(surveyId, demoData.results[surveyId][date],date);
-                });
-            });
-        }
         var results = table
             .filter(function (item) {
                 return item[postId] !== undefined;
@@ -77,13 +87,6 @@ function InMemoryDBAdapter(session) {
 
     function getServquals(postId, callback) {
         var table = getTable("servqual");
-        if (Object.keys(table).length <= 0) {
-            Object.keys(demoData.servqual).forEach(function (postId) {
-                Object.keys(demoData.servqual[postId]).forEach(function (date) {
-                    saveServqual(postId, demoData.servqual[postId][date], date);
-                });
-            });
-        }
         var result = table
             .filter(function (item) {
                 return item[postId] !== undefined;
@@ -155,14 +158,7 @@ function InMemoryDBAdapter(session) {
 
     function getSurveys(callback) {
         getObjectsFromStorage("surveys", function (objects) {
-            if (Object.keys(objects).length > 0) {
-                callback(objects);
-            } else {
-                Object.keys(demoData.surveys).forEach(function (surveyId) {
-                    storeSurvey(surveyId, demoData.surveys[surveyId]);
-                });
-                getObjectsFromStorage("surveys", callback);
-            }
+            callback(objects);
         });
     }
 
@@ -181,7 +177,8 @@ function InMemoryDBAdapter(session) {
         deleteSurvey: deleteSurvey,
         postResults: postResults,
         getResults: getResults,
-        changeName: changeName
+        changeName: changeName,
+        init: init
     };
 }
 

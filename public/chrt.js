@@ -38,16 +38,50 @@ function init() {
                 data.push(totalQuality);
             });
 
-            displatCharts(data, monthLabels);
+            displayLineCharts(data, monthLabels);
         }
     };
     xhr.send();
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open('GET', "" + '/statistic?id=' + surveyId);
+    xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr2.onload = function () {
+        var result = JSON.parse(xhr2.response);
+        console.log("result: " + JSON.stringify(result));
+        if (!!result) {
+            var ageData = [];
+            var locationData = [];
+            if(result.age) {
+                var totalAge = result.age.reduce(function (acc, val) {
+                    return acc + val;
+                });
+                console.log("totalAge: " + JSON.stringify(totalAge));
+                for (i = 0; i < 5; ++i) {
+                    ageData[i] = result.age[i] / totalAge * 100;
+                }
+            }
+            if(result.location) {
+                var totalLocation = result.location.reduce(function (acc, val) {
+                    return acc + val;
+                });
+                console.log("totalLocation: " + JSON.stringify(totalLocation));
+                for (i = 0; i < 6; ++i) {
+                    locationData[i] = result.location[i] / totalLocation * 100;
+                    console.log("ageData["+i+"]" + ageData[i]);
+                }
+                console.log("ageData: " + ageData);
+                console.log("locationData: " + locationData);
+                displayPieCharts(ageData, locationData);
+            }
+        }
+    };
+    xhr2.send();
 }
 
-function displatCharts(data, monthLabels) {
+function displayLineCharts(linedata, monthLabels) {
 
-    var ctx = document.getElementById("myChart");
-
+    var ctx = document.getElementById("lineChart");
     var data = {
         labels: monthLabels,
         datasets: [
@@ -70,24 +104,45 @@ function displatCharts(data, monthLabels) {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: data,
+                data: linedata,
             }
         ]
     };
 
-    var myLineChart = new Chart(ctx, {
+    var lineChart = new Chart(ctx, {
         type: 'line',
         data: data,
     });
+}
 
-    var ctx = document.getElementById("myPieChart").getContext('2d');
-    var myChart = new Chart(ctx, {
+
+function displayPieCharts(ageData, locationData) {
+
+    var ctx = document.getElementById("ageChart").getContext('2d');
+    var ageChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Green", "Blue", "Gray", "Purple", "Yellow", "Red", "Black"],
+            labels: ["меньше 20", "20-30", "30-40", "40-50", "больше 50"],
             datasets: [{
                 backgroundColor: [
                     "#2ecc71",
+                    "#3498db",
+                    "#95a5a6",
+                    "#9b59b6",
+                    "#f1c40f"
+                ],
+                data: ageData
+            }]
+        }
+    });
+
+    ctx = document.getElementById("locationChart").getContext('2d');
+    var locationChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Минская", "Витебская", "Брестская", "Гродненская", "Гомельская", "Могилевская"],
+            datasets: [{
+                backgroundColor: [
                     "#3498db",
                     "#95a5a6",
                     "#9b59b6",
@@ -95,7 +150,7 @@ function displatCharts(data, monthLabels) {
                     "#e74c3c",
                     "#34495e"
                 ],
-                data: [12, 19, 3, 17, 28, 24, 7]
+                data: locationData
             }]
         }
     });

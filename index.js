@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var dbadapter = require("./dbadapter");
 var inmemorydbadapter = require("./inmemorydbadapter");
+var initialized = false;
 
 var app = express();
 app.use(
@@ -19,6 +20,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 function getDBAdapter(req) {
     //var db = new dbadapter();
     var db = new inmemorydbadapter(req.session);
+    if(!initialized) {
+        db.init();
+        initialized = true;
+    }
     return db;
 }
 
