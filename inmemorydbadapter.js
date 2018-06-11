@@ -72,11 +72,9 @@ function InMemoryDBAdapter(session) {
         var results = table
             .filter(function (item) {
                 return item[postId] !== undefined;
-            }).map(function (item) {
-                return item[postId];
-            });
+            })[0];
         console.log("getResults :" + JSON.stringify(results));
-        callback(results);
+        callback(results[postId]);
     }
 
     function getServqual(postId, date, callback) {
@@ -142,6 +140,7 @@ function InMemoryDBAdapter(session) {
             };
             table.push(result);
         }
+        console.log("RESULT JSON: " + result);
         callback && callback(result);
     }
 

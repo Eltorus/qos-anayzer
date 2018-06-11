@@ -121,14 +121,14 @@ var results = {
     "Оценка услуг мобильной связи":
         {
             "Sun Jun 10 2018 19:57:05 GMT+0300 (Belarus Standard Time)": {
-                "1": {
-                    "4": {"importance": "4", "contentment": "4"},
-                    "5": {"importance": "2", "contentment": "3"},
-                    "6": {"importance": "4", "contentment": "4"},
-                    "7": {"importance": "2", "contentment": "5"},
-                    "8": {"importance": "4", "contentment": "4"},
-                    "9": {"3": "3"},
-                    "10": {"2": "5", "3": "5"}
+                "aa1": {
+                    "aa14": {"importance": "4", "contentment": "4"},
+                    "aa15": {"importance": "2", "contentment": "3"},
+                    "aa16": {"importance": "4", "contentment": "4"},
+                    "aa17": {"importance": "2", "contentment": "5"},
+                    "aa18": {"importance": "4", "contentment": "4"},
+                    "aa19": {"3": "3"},
+                    "aa110": {"2": "5", "3": "5"}
                 }, "age": "20", "location": "Минская"
             }
         },

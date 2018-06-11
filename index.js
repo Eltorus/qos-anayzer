@@ -67,7 +67,9 @@ app.get("/create", function (req, res) {
 app.post("/changeJson", function (req, res) {
     var db = getDBAdapter(req);
     var id = req.body.Id;
-    var json = req.body.Json;
+    var json = JSON.parse(req.body.Json);
+    console.log("JSON : " + json);
+    console.log("id : " + id);
     db.storeSurvey(id, json, function (result) {
         sendJsonResult(res, result.json);
     });

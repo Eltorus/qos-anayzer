@@ -1,100 +1,100 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 section {
-  margin: 2em 0;
+    margin: 2em 0;
 }
+
 .page-link {
-  margin: 1em 2em;
+    margin: 1em 2em;
 }
 
 .survey-page-header,
 .survey-page-header .sv_main {
-  background-color: #e7e7e7;
+    background-color: #e7e7e7;
 }
 
 .survey-page-header-content {
-  max-width: 80%;
-  margin: auto;
-  padding: 1.5em;
+    max-width: 80%;
+    margin: auto;
+    padding: 1.5em;
 }
 
 .survey-page-header-content a {
-  color: white;
-  text-decoration: unset;
+    color: white;
+    text-decoration: unset;
 }
 
 .sv_main.sv_frame .sv_container .sv_header {
-  padding-top: 2em;
+    padding-top: 2em;
 }
 
 .sv_main.sv_frame .sv_container {
-   max-width: 100%;
+    max-width: 100%;
 }
 
 .svd_container .sv_custom_header {
-  display: none;
+    display: none;
 }
 
 .sv_main.sv_frame .svd_container .sv_container {
-  max-width: none;
-  padding: unset;
+    max-width: none;
+    padding: unset;
 }
 
 .surveys-list table thead td {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .surveys-list table td:nth-child(2) {
-  width: 50%;
+    width: 50%;
 }
 
 .sv_button_link {
-  color: #1ab394;
-  width: 100px;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  text-align: center;
+    color: #1ab394;
+    width: 100px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-align: center;
 }
 
 .sv_button_link:hover,
 .sv_button_link:visited:hover {
-  background-color: #1ab394;
-  border-color: #1ab394;
-  color: #fff;
-  border-radius: 2px;
-  text-decoration: none;
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #fff;
+    border-radius: 2px;
+    text-decoration: none;
 }
 
 .sv_button_link:visited {
-  color: #1ab394;
+    color: #1ab394;
 }
 
 .sv_button_link.sv_button_delete {
-  color: #ec2626;
+    color: #ec2626;
 }
 
 .sv_button_link.sv_button_delete:hover {
-  background-color: #ec2626;
-  color: #fff;
+    background-color: #ec2626;
+    color: #fff;
 }
 
 #resultsTable td {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .sv_body {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .fork_me_on_github img {
-  z-index: 1;
+    z-index: 1;
 }
-
 
 .sq-title {
     font-size: 20px;
@@ -105,50 +105,62 @@ section {
 }
 
 .container {
-  width: 50%;
-  display: inline-block;
-  margin: 15px auto;
+    width: 50%;
+    display: inline-block;
+    margin: 15px auto;
 }
 
 .sv_window {
-  height: 100%;
-  width: 70%;
-  overflow: scroll;
+    height: 100%;
+    width: 70%;
+    overflow: scroll;
 }
 
 .closeSurveyResult {
-  display: none;
-  background-color: red;
-  color: white;
-  font-size: 0.85em;
-  font-weight: bold;
-  line-height: 2em;
-  border: none;
-  min-width: 100px;
-  cursor: pointer;
-  padding: 0 2em;
-  border-radius: 2px;
-  margin-right: 40px;
-  float: right;
+    display: none;
+    background-color: red;
+    color: white;
+    font-size: 0.85em;
+    font-weight: bold;
+    line-height: 2em;
+    border: none;
+    min-width: 100px;
+    cursor: pointer;
+    padding: 0 2em;
+    border-radius: 2px;
+    margin-right: 40px;
+    float: right;
 }
 
 body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Lato", sans-serif
-  }
-  
-  .w3-bar,
-  h1,
-  button {
+}
+
+.w3-bar,
+h1,
+button {
     font-family: "Montserrat", sans-serif
-  }
-  
-  .fa-anchor,
-  .fa-coffee {
+}
+
+.fa-anchor,
+.fa-coffee {
     font-size: 200px
-  }
+}
+
+.admin-container {
+    margin-left: 20px;
+    display: inline-table;
+    margin-right: 20px;
+    width: 100%;
+}
+
+.chart-container {
+    width: 50%;
+    display: inline-block;
+}

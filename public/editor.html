@@ -3,27 +3,27 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>SurveyJS Editor</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/worker-json.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-json.js" type="text/javascript" charset="utf-8"></script>
+    <title>Редактор</title>
+    <script src="./ace.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./worker-json.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./mode-json.js" type="text/javascript" charset="utf-8"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-debug.js"></script>
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./knockout-debug.js"></script>
     <script src="https://unpkg.com/survey-knockout"></script>
-    <link rel="stylesheet" href="https://unpkg.com/survey-knockout/survey.css" />
+    <link rel="stylesheet" href="./survey.css" />
 
-    <script src="https://unpkg.com/surveyjs-editor"></script>
-    <link rel="stylesheet" href="https://unpkg.com/surveyjs-editor/surveyeditor.css" />
+    <script src="./survey.editor.js"></script>
+    <link rel="stylesheet" href="./surveyeditor.css" />
     <link rel="stylesheet" href="./index.css" />
 </head>
 
 <body>
     <div class="survey-page-header">
         <div class="sv_main survey-page-header-content">
-            <button onclick="window.location = '/'">&lt&nbspBack</button>
+            <button onclick="window.location = '/'">&lt&nbspНазад</button>
         </div>
     </div>
     <div class="sv_main sv_frame sv_default_css">
@@ -34,8 +34,8 @@
                 <h3>
                     <span id="sjs_editor_title_edit" class="editor_title_edit" style="display: none;">
                         <input style="border-top: none; border-left: none; border-right: none; outline: none;" />
-                        <span class="btn btn-success" onclick="postEdit()" style="border-radius: 2px; margin-top: -8px; background-color: #1ab394; border-color: #1ab394;">Update</span>
-                        <span class="btn btn-warning" onclick="cancelEdit()" style="border-radius: 2px; margin-top: -8px;">Cancel</span>
+                        <span class="btn btn-success" onclick="postEdit()" style="border-radius: 2px; margin-top: -8px; background-color: #1ab394; border-color: #1ab394;">Обновить</span>
+                        <span class="btn btn-warning" onclick="cancelEdit()" style="border-radius: 2px; margin-top: -8px;">Отмена</span>
                     </span>
                     <span id="sjs_editor_title_show">
                         <span style="padding-top: 1px; height: 39px; display: inline-block;"></span>
