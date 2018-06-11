@@ -1,71 +1,73 @@
 function SurveyManager(baseUrl, accessKey) {
-  var self = this;
-  self.availableSurveys = ko.observableArray();
+    var self = this;
+    self.availableSurveys = ko.observableArray();
 
-  self.loadSurveys = function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", baseUrl + "/getActive?accessKey=" + accessKey);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
-      var result = xhr.response ? JSON.parse(xhr.response) : {};
-      self.availableSurveys(
-        Object.keys(result).map(function(key) {
-          return {
-            id: key,
-            name: result[key].name || key,
-            survey: result[key].json || result[key]
-          };
-        })
-      );
+    self.loadSurveys = function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", baseUrl + "/getActive?accessKey=" + accessKey);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function () {
+            var result = xhr.response ? JSON.parse(xhr.response) : {};
+            self.availableSurveys(
+                Object.keys(result).map(function (key) {
+                    return {
+                        id: key,
+                        name: result[key].name || key,
+                        survey: result[key].json || result[key]
+                    };
+                })
+            );
+        };
+        xhr.send();
     };
-    xhr.send();
-  };
 
-  self.createSurvey = function(name, onCreate) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(
-      "GET",
-      baseUrl + "/create?accessKey=" + accessKey + "&name=" + name
-    );
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
-      var result = xhr.response ? JSON.parse(xhr.response) : null;
-      !!onCreate && onCreate(xhr.status == 200, result, xhr.response);
+    self.createSurvey = function (name, onCreate) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(
+            "GET",
+            baseUrl + "/create?accessKey=" + accessKey + "&name=" + name
+        );
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function () {
+            var result = xhr.response ? JSON.parse(xhr.response) : null;
+            !!onCreate && onCreate(xhr.status == 200, result, xhr.response);
+        };
+        xhr.send();
     };
-    xhr.send();
-  };
 
-  self.deleteSurvey = function(id, onDelete) {
-    if (confirm("Вы уверены что хотите удалить выбранную анкету?")) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", baseUrl + "/delete?accessKey=" + accessKey + "&id=" + id);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onload = function() {
-        var result = xhr.response ? JSON.parse(xhr.response) : null;
-        !!onDelete && onDelete(xhr.status == 200, result, xhr.response);
-      };
-      xhr.send();
-      window.location = "/";
-    }
-  };
-
-    self.getServqual = function(id) {
+    self.deleteSurvey = function (id, onDelete) {
+        if (confirm("Вы уверены что хотите удалить выбранную анкету?")) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", baseUrl + "/servqual?accessKey=" + accessKey + "&id=" + id);
+            xhr.open("GET", baseUrl + "/delete?accessKey=" + accessKey + "&id=" + id);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onload = function() {
-                var result = xhr.response;
-                alert(JSON.stringify(result));
+            xhr.onload = function () {
+                var result = xhr.response ? JSON.parse(xhr.response) : null;
+                !!onDelete && onDelete(xhr.status == 200, result, xhr.response);
             };
             xhr.send();
             window.location = "/";
+        }
+    };
+
+    self.getServqual = function (id) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", baseUrl + "/servqual?accessKey=" + accessKey + "&id=" + id);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onload = function () {
+            var result = xhr.response;
+            alert(JSON.stringify(result));
+        };
+        xhr.send();
+        window.location = "/";
 
     };
 
-  self.loadSurveys();
+    self.loadSurveys();
 }
 
 ko.applyBindings(
-  new SurveyManager(""),
-  document.getElementById("surveys-list")
+    new SurveyManager(""),
+    document.getElementById("surveys-list")
 );
+
+

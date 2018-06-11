@@ -1,4 +1,5 @@
 var demoData = require("./demo-surveys");
+var sessionUser;
 
 
 function InMemoryDBAdapter(session) {
@@ -37,6 +38,48 @@ function InMemoryDBAdapter(session) {
         });
         callback(objects);
     }
+
+    function login(name, pswrd, callback) {
+        var table = getTable("users");
+        var result = table.filter(function (item) {
+            return item.name === name && item.pswrd === pswrd;
+        });
+        if (!!result) {
+            sessionUser = result;
+        } else  {
+            callback("Wrong");
+        }
+        callback(sessionUser);
+    }
+
+    function logout(callback) {
+        sessionUser = {};
+        callback(sessionUser);
+    }
+
+
+    function getUser(callback) {
+        callback(sessionUser);
+    }
+
+    function saveUser(name, pswrd, callback) {
+        var table = getTable("users");
+        var result = table.filter(function (item) {
+            return item.name === name;
+        });
+        if (!!result) {
+            callback("Already exists");
+        } else {
+            result = {
+                name : name,
+                pswrd :pswrd
+            };
+            table.push(result);
+            sessionUser = result;
+            callback(sessionUser);
+        }
+    }
+
 
     function addSurvey(name, callback) {
         var table = getTable("surveys");
@@ -177,6 +220,10 @@ function InMemoryDBAdapter(session) {
         postResults: postResults,
         getResults: getResults,
         changeName: changeName,
+        getUser: getUser,
+        login: login,
+        saveUser : saveUser,
+        logout : logout,
         init: init
     };
 }

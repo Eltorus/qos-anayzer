@@ -143,12 +143,12 @@ function displayPieCharts(ageData, locationData) {
             labels: ["Минская", "Витебская", "Брестская", "Гродненская", "Гомельская", "Могилевская"],
             datasets: [{
                 backgroundColor: [
-                    "#3498db",
-                    "#95a5a6",
-                    "#9b59b6",
+                    "#22db03",
+                    "#ec7f00",
+                    "#004ffd",
                     "#f1c40f",
-                    "#e74c3c",
-                    "#34495e"
+                    "#00e7e6",
+                    "#d400cd"
                 ],
                 data: locationData
             }]

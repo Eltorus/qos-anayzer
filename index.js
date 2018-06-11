@@ -32,6 +32,38 @@ function sendJsonResult(res, obj) {
     res.send(JSON.stringify(obj));
 }
 
+app.post("/login", function (req, res) {
+    var db = getDBAdapter(req);
+    var name = req.body.name;
+    var pswrd = req.body.password;
+    db.login(name, pswrd, function (result) {
+        sendJsonResult(res, result);
+    });
+});
+
+app.post("/logout", function (req, res) {
+    var db = getDBAdapter(req);
+    db.logout(function (result) {
+        sendJsonResult(res, result);
+    });
+});
+
+app.get("/user", function (req, res) {
+    var db = getDBAdapter(req);
+    db.getUser(function (result) {
+        sendJsonResult(res, result);
+    });
+});
+
+app.put("/user", function (req, res) {
+    var name = req.body.name;
+    var pswrd = req.body.password;
+    var db = getDBAdapter(req);
+    db.saveUser(name, pswrd, function (result) {
+        sendJsonResult(res, result);
+    });
+});
+
 app.get("/getActive", function (req, res) {
     var db = getDBAdapter(req);
     db.getSurveys(function (result) {
