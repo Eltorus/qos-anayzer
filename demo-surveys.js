@@ -127,8 +127,8 @@ var results = {
                     "aa16": {"importance": "4", "contentment": "4"},
                     "aa17": {"importance": "2", "contentment": "5"},
                     "aa18": {"importance": "4", "contentment": "4"},
-                    "aa19": {"3": "3"},
-                    "aa110": {"2": "5", "3": "5"}
+                    "aa19": {"importance": "4", "contentment": "4"},
+                    "aa110": {"importance": "4", "contentment": "4"},
                 }, "age": "20", "location": "Минская"
             }
         },
