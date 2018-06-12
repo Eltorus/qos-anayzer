@@ -164,3 +164,16 @@ button {
     width: 50%;
     display: inline-block;
 }
+
+.w3-bar .w3-bar-item {
+    float: right;
+}
+
+.sv_button_link {
+    width: auto;
+    font-size: 18px;
+}
+
+.table td, .table th {
+    font-size: 18px;
+}

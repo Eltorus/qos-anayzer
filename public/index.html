@@ -5,40 +5,45 @@
     <meta charset="utf-8" />
     <title>Qos Analyzer</title>
     <link rel="stylesheet" href="./bootstrap.min.css" />
-    <script type="text/javascript" src="./user.js"></script>
     <script type="text/javascript" src="./jquery.min.js"></script>
     <script src="./bootstrap.min.js"></script>
     <script src="./knockout-debug.js"></script>
     <link rel="stylesheet" href="./survey.css" />
+    <link rel="stylesheet" href="./w3.css">
+    <link rel="stylesheet" href="./font-awesome.min.css">
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./ii.css" />
 
 </head>
 
+
 <body>
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-white" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white" onclick="window.location = 'admin.html'">Панель администратора</a>
+    </div>
+</div>
+<br>
+<br>
+<div class="sv_container">
     <div class="sv_main sv_frame sv_default_css">
         <div class="sv_custom_header"></div>
-        <div class="sv_container">
+        <div class="sv_container" style="max-width: 80%">
             <div class="sv_header">
                 <h3>Средство оценки качества услуг связи</h3>
                 <p>Выберите опрос для прохождения</p>
             </div>
             <div class="sv_body">
                 <div id="surveys-list" class="surveys-list">
-                    <section>
-                        <button data-bind="click: function() { createSurvey('NewSurvey' + Date.now(), loadSurveys); }">Добавить опрос</button>
-                    </section>
                     <table class="table table-striped">
                         <tbody>
                             <!-- ko foreach: availableSurveys -->
                             <tr>
                                 <td data-bind="text: name"></td>
                                 <td>
-                                    <a class="sv_button_link" data-bind="attr: { href: 'survey.html?id=' + ko.unwrap(id) }">Пройти опрос</a>
-                                    <a class="sv_button_link" data-bind="attr: { href: 'editor.html?id=' + ko.unwrap(id)+'&name='+ko.unwrap(name) }">Редактировать</a>
-                                    <a class="sv_button_link" data-bind="visible: $parent.isAdmin(),attr: { href: 'results.html?id=' + ko.unwrap(id) }">Результаты</a>
-                                    <a class="sv_button_link" data-bind="visible: $parent.isAdmin(),attr: { href: 'admin.html?id=' + ko.unwrap(id) }">Servqual</a>
-                                    <span class="sv_button_link sv_button_delete" data-bind="visible: $parent.isAdmin(),click: function() { $parent.deleteSurvey(ko.unwrap(id), $parent.loadSurveys); }">Удалить</span>
+                                    <a class="sv_button_link" style="width: auto" data-bind="attr: { href: 'survey.html?id=' + ko.unwrap(id) }">Пройти опрос</a>
                                 </td>
                             </tr>
                             <!-- /ko -->
@@ -48,6 +53,7 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 <script src="index.js"></script>
 

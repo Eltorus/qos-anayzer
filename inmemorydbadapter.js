@@ -18,6 +18,16 @@ function InMemoryDBAdapter(session) {
         Object.keys(demoData.surveys).forEach(function (surveyId) {
             storeSurvey(surveyId, demoData.surveys[surveyId]);
         });
+        Object.keys(demoData.surveys).forEach(function (surveyId) {
+            storeSurvey(surveyId, demoData.surveys[surveyId]);
+        });
+        Object.keys(demoData.users).forEach(function (userName) {
+            var table = getTable("users");
+            var result = {};
+            result[userName] = demoData.users[userName];
+            table.push(result);
+            console.log("RESULT JSON: " + result);
+        });
         console.log("INITIALIZED")
     }
 
@@ -42,8 +52,9 @@ function InMemoryDBAdapter(session) {
     function login(name, pswrd, callback) {
         var table = getTable("users");
         var result = table.filter(function (item) {
-            return item.name === name && item.pswrd === pswrd;
+            return item[name] !== undefined && item[name] === pswrd;
         });
+        console.log(result);
         if (!!result) {
             sessionUser = result;
         } else  {
@@ -53,7 +64,7 @@ function InMemoryDBAdapter(session) {
     }
 
     function logout(callback) {
-        sessionUser = {};
+        sessionUser = null;
         callback(sessionUser);
     }
 
@@ -61,25 +72,6 @@ function InMemoryDBAdapter(session) {
     function getUser(callback) {
         callback(sessionUser);
     }
-
-    function saveUser(name, pswrd, callback) {
-        var table = getTable("users");
-        var result = table.filter(function (item) {
-            return item.name === name;
-        });
-        if (!!result) {
-            callback("Already exists");
-        } else {
-            result = {
-                name : name,
-                pswrd :pswrd
-            };
-            table.push(result);
-            sessionUser = result;
-            callback(sessionUser);
-        }
-    }
-
 
     function addSurvey(name, callback) {
         var table = getTable("surveys");
@@ -222,7 +214,6 @@ function InMemoryDBAdapter(session) {
         changeName: changeName,
         getUser: getUser,
         login: login,
-        saveUser : saveUser,
         logout : logout,
         init: init
     };

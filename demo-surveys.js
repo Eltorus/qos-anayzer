@@ -169,8 +169,15 @@ var servqual = {
     }
 };
 
+var users = {
+    "admin": "admin",
+    "1111": "1111"
+};
+
+
 module.exports = {
     surveys: surveys,
     results: results,
-    servqual: servqual
+    servqual: servqual,
+    users :users
 };

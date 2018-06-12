@@ -1,73 +1,62 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./font-awesome.min.css">
-<title>Matrix with multiple choices for every column - Matrix Dropdown question, jQuery Survey Library Example</title>
+
 <head>
-    <meta charset="utf-8"/>
-    <title>Панель администратора</title>
-    <link rel="stylesheet" href="./bootstrap.min.css"/>
+    <meta charset="utf-8" />
+    <title>Qos Analyzer</title>
     <script type="text/javascript" src="./user.js"></script>
+    <link rel="stylesheet" href="./bootstrap.min.css" />
     <script type="text/javascript" src="./jquery.min.js"></script>
-    <script type="text/javascript" src="./jquery.dataTables.min.js"></script>
     <script src="./bootstrap.min.js"></script>
     <script src="./knockout-debug.js"></script>
-    <script src="./survey.ko.js"></script>
-    <link rel="stylesheet" href="./survey.css"/>
-    <link rel="stylesheet" href="./jquery.dataTables.min.css"/>
-    <link rel="stylesheet" href="./index.css"/>
+    <link rel="stylesheet" href="./survey.css" />
     <link rel="stylesheet" href="./w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="./font-awesome.min.css">
-    <script src="./Chart.min.js"></script>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./ii.css" />
+    <link rel="stylesheet" href="./index.css" />
+
 </head>
 
 <body>
-
 <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-white w3-card w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-white" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white" onclick="window.location = '/'">На главную</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-grey">Личный кабинет</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white"  style="padding-right: 1px" onclick="window.location = ''">Выйти</a>
     </div>
 </div>
-<br/><br/><br/>
-<div class="admin-container">
-    <div class="chart-container">
-    <h3>Качество услуги, расчитанное по методике SERVQUAL</h3>
-    <canvas id="lineChart"></canvas>
-    </div>
-    <div class="chart-container">
-    <h3>Соотношение пользователей, прошедших опрос, по возрасту</h3>
-    <canvas id="ageChart"></canvas>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="chart-container">
-    <h3>Соотношение пользователей, прошедших опрос, по областям</h3>
-    <canvas id="locationChart"></canvas>
+<br/>
+<br/>
+<div class="sv_main sv_frame sv_default_css">
+    <div class="sv_custom_header"></div>
+    <div class="sv_container"style="max-width: 80%">
+        <div class="sv_header">
+            <h3>Панель администратора</h3>
+        </div>
+        <div class="sv_body">
+            <div id="surveys-list" class="surveys-list">
+                <section>
+                    <button style="font-size: 1em" data-bind="click: function() { createSurvey('NewSurvey' + Date.now(), loadSurveys); }">Добавить опрос</button>
+                </section>
+                <table class="table table-striped">
+                    <tbody>
+                    <!-- ko foreach: availableSurveys -->
+                    <tr>
+                        <td data-bind="text: name"></td>
+                        <td>
+                            <a class="sv_button_link" data-bind="attr: { href: 'editor.html?id=' + ko.unwrap(id)+'&name='+ko.unwrap(name) }">Редактировать</a>
+                            <a class="sv_button_link" data-bind="attr: { href: 'results.html?id=' + ko.unwrap(id) }">Результаты опросов</a>
+                            <a class="sv_button_link" data-bind="attr: { href: 'servqual.html?id=' + ko.unwrap(id) }">Качество услуг (SERVQUAL)</a>
+                            <span class="sv_button_link sv_button_delete" data-bind="click: function() { $parent.deleteSurvey(ko.unwrap(id), $parent.loadSurveys); }">Удалить</span>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-<script type="text/javascript" src="./index.js"></script>
-<script type="text/javascript" src="./chrt.js"></script>
-<script>
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function myFunction() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-</script>
-
 </body>
-
+<script src="index.js"></script>
 </html>

@@ -4,8 +4,9 @@ function getUser() {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         var result = xhr.response;
+        console.log("result : " + result);
         if(result) {
-            window.location = "/"
+            window.location = "admin.html";
         }
     };
     xhr.send();
@@ -18,22 +19,9 @@ function login() {
     xhr.onload = function () {
         var result = xhr.response;
         if(result) {
-            window.location = "/"
+            window.location = "admin.html";
         } else {
-
-        }
-    };
-    xhr.send();
-}
-
-function saveUser() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("PUT", "" + "/user");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onload = function () {
-        var result = xhr.response;
-        if(result !== "Not logged") {
-            window.location = "/"
+            window.location = "/";
         }
     };
     xhr.send();
