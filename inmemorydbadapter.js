@@ -18,9 +18,6 @@ function InMemoryDBAdapter(session) {
         Object.keys(demoData.surveys).forEach(function (surveyId) {
             storeSurvey(surveyId, demoData.surveys[surveyId]);
         });
-        Object.keys(demoData.surveys).forEach(function (surveyId) {
-            storeSurvey(surveyId, demoData.surveys[surveyId]);
-        });
         Object.keys(demoData.users).forEach(function (userName) {
             var table = getTable("users");
             var result = {};
@@ -49,8 +46,10 @@ function InMemoryDBAdapter(session) {
     }
 
     function login(name, pswrd, callback) {
+        console.log("NAME:PSWRD: " + name + "     " + pswrd);
         var table = getTable("users");
         var result = table.filter(function (item) {
+            console.log("ITEM: " + item[name] !== undefined && item[name] === pswrd);
             return item[name] !== undefined && item[name] === pswrd;
         })[0];
         console.log(result);

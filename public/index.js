@@ -45,7 +45,7 @@ function SurveyManager(baseUrl, accessKey) {
                 !!onDelete && onDelete(xhr.status == 200, result, xhr.response);
             };
             xhr.send();
-            window.location = "/";
+            window.location = "admin.html";
         }
     };
 

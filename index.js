@@ -35,7 +35,7 @@ function sendJsonResult(res, obj) {
 app.post("/login", function (req, res) {
     var db = getDBAdapter(req);
     var name = req.body.name;
-    var pswrd = req.body.name;
+    var pswrd = req.body.pswrd;
     db.login(name, pswrd, function (result) {
         sendJsonResult(res, result);
     });
@@ -211,34 +211,27 @@ app.get("/statistic", function (req, res) {
         };
         if (result) {
             console.log("/servqual : " + JSON.stringify(result));
-            Object.keys(result).forEach(function (i) {
-            Object.keys(result[i]).forEach(function (date) {
-                console.log("result[i] : " + JSON.stringify(result[i]));
-                var age = parseInt(result[i][date].age);
+            Object.keys(result).forEach(function (date) {
+                var age = parseInt(result[date].age);
                 var index;
                 if (age < 20) {
                     index = 0;
-                }
-                if (age >= 20 || age < 30) {
+                } else if (age >= 20 && age < 30) {
                     index = 1;
-                }
-                if (age >= 30 || age < 40) {
+                } else if (age >= 30 && age < 40) {
                     index = 2;
-                }
-                if (age >= 40 || age < 50) {
+                } else if (age >= 40 && age < 50) {
                     index = 3;
-                }
-                if (age >= 50) {
+                } else if (age >= 50) {
                     index = 4;
                 }
                 resultStatistic.age[index] += 1;
-                var location = result[i][date].location;
+                var location = result[date].location;
                 for (j = 0, len = locations.length; j < len; ++j) {
                     if (location === locations[j]) {
                         resultStatistic.location[j] += 1;
                     }
                 }
-            });
             });
         }
         console.log("/resultStatistic : " + JSON.stringify(resultStatistic));
