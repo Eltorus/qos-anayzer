@@ -26,7 +26,6 @@ function InMemoryDBAdapter(session) {
             var result = {};
             result[userName] = demoData.users[userName];
             table.push(result);
-            console.log("RESULT JSON: " + result);
         });
         console.log("INITIALIZED")
     }
@@ -53,18 +52,18 @@ function InMemoryDBAdapter(session) {
         var table = getTable("users");
         var result = table.filter(function (item) {
             return item[name] !== undefined && item[name] === pswrd;
-        });
+        })[0];
         console.log(result);
         if (!!result) {
             sessionUser = result;
         } else  {
-            callback("Wrong");
+            sessionUser = undefined;
         }
         callback(sessionUser);
     }
 
     function logout(callback) {
-        sessionUser = null;
+        sessionUser = undefined;
         callback(sessionUser);
     }
 
@@ -175,7 +174,6 @@ function InMemoryDBAdapter(session) {
             };
             table.push(result);
         }
-        console.log("RESULT JSON: " + result);
         callback && callback(result);
     }
 

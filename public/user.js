@@ -11,5 +11,14 @@ function getUser() {
     };
     xhr.send();
 }
+function logout() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "" + "/logout");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onload = function () {
+        window.location.reload("index.html");
+    };
+    xhr.send();
+}
 
 getUser();

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="./jquery.min.js"></script>
     <script type="text/javascript" src="./login.js"></script>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
@@ -132,13 +133,12 @@
 
         <div class="container">
             <label for="name"><b>Имя пользователя</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" placeholder="Введите имя" id="name" required>
 
             <label for="pswrd"><b>Пароль</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Введите пароль" id="pswrd" required>
 
             <button type="submit" onclick="login()">Войти</button>
-            <button type="submit" onclick="saveUser()">Зарегистрироваться</button>
         </div>
     </form>
 </div>

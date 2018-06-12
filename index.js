@@ -35,8 +35,7 @@ function sendJsonResult(res, obj) {
 app.post("/login", function (req, res) {
     var db = getDBAdapter(req);
     var name = req.body.name;
-    var pswrd = req.body.password;
-    console.log("name : " + name + " pswrd: " + pswrd);
+    var pswrd = req.body.name;
     db.login(name, pswrd, function (result) {
         sendJsonResult(res, result);
     });

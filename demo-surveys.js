@@ -134,7 +134,7 @@ var results = {
         },
     "Оценка домашнего интернета":
         {
-            "Sun Jun 10 2018 19:57:07 GMT+0300 (Belarus Standard Time)": {
+            "Mon Jun 30 2018 12:00:07 GMT+0300 (Belarus Standard Time)": {
                 "5": {
                     "6": {"importance": "4", "contentment": "3"},
                     "7": {"importance": "3", "contentment": "2"},

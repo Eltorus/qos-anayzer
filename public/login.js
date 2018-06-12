@@ -4,7 +4,6 @@ function getUser() {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         var result = xhr.response;
-        console.log("result : " + result);
         if(result) {
             window.location = "admin.html";
         }
@@ -13,18 +12,20 @@ function getUser() {
 }
 
 function login() {
+    var name = $("#name").val();
+    var pswrd = $("#pswrd").val();
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "" + "/login");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onload = function () {
-        var result = xhr.response;
-        if(result) {
-            window.location = "admin.html";
+        var result = JSON.parse(xhr.response);
+        if(result[name] !== undefined && result[name] === pswrd) {
+            window.location.replace("admin.html");
         } else {
-            window.location = "/";
+            window.location.reload("index.html");
         }
     };
-    xhr.send();
+    xhr.send(JSON.stringify({ name: name, pswrd: pswrd}));
 }
 
 getUser();
