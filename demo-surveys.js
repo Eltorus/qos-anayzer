@@ -120,7 +120,7 @@ var surveys = {
 var results = {
     "Оценка услуг мобильной связи":
         {
-            "Sun Jun 10 2018 19:57:05 GMT+0300 (Belarus Standard Time)": {
+            "2018-4-07 00:53:14": {
                 "aa1": {
                     "aa14": {"importance": "4", "contentment": "4"},
                     "aa15": {"importance": "2", "contentment": "3"},
@@ -130,7 +130,19 @@ var results = {
                     "aa19": {"importance": "4", "contentment": "4"},
                     "aa110": {"importance": "4", "contentment": "4"},
                 }, "age": "20", "location": "Минская"
-            }
+            },
+            "2018-5-10 10:24:14": {
+                "aa1": {
+                    "aa14": {"importance": "1", "contentment": "5"},
+                    "aa15": {"importance": "1", "contentment": "5"},
+                    "aa16": {"importance": "1", "contentment": "5"},
+                    "aa17": {"importance": "1", "contentment": "5"},
+                    "aa18": {"importance": "1", "contentment": "5"},
+                    "aa19": {"importance": "1", "contentment": "5"},
+                    "aa110": {"importance": "1", "contentment": "5"},
+                }, "age": "40", "location": "Брестская"
+            },
+
         },
     "Оценка домашнего интернета":
         {
@@ -148,19 +160,37 @@ var results = {
 
 var servqual = {
     "Оценка услуг мобильной связи": {
-        "4.2018": {
-            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
-            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
-            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
+        "2.2018": {
+            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 3, "value": 12}},
             "aa17": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
             "aa18": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 16}},
-            "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 3, "value": 12}},
             "aa110": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 20}}
         },
+        "3.2018": {
+            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 1, "contentment": {"count": 8, "value": 8}},
+            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 1, "contentment": {"count": 8, "value": 8}},
+            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 1, "contentment": {"count": 6, "value": 12}},
+            "aa17": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 1, "contentment": {"count": 8, "value": 16}},
+            "aa18": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 1, "contentment": {"count": 8, "value": 16}},
+            "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 1, "contentment": {"count": 6, "value": 12}},
+            "aa110": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 1, "contentment": {"count": 10, "value": 20}}
+        },
+        "4.2018": {
+            "aa14": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa15": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa16": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 3, "value": 12}},
+            "aa17": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
+            "aa18": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
+            "aa19": {"w1": 1, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 3, "value": 12}},
+            "aa110": {"w1": 1, "w2": 0, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 20}}
+        },
         "5.2018": {
-            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
-            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 8}},
-            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 4, "value": 12}},
+            "aa14": {"w1": 0, "w2": 4, "w3": 0, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa15": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 2, "value": 8}},
+            "aa16": {"w1": 0, "w2": 0, "w3": 0, "w4": 4, "w5": 0, "contentment": {"count": 3, "value": 12}},
             "aa17": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 16}},
             "aa18": {"w1": 0, "w2": 0, "w3": 0, "w4": 0, "w5": 4, "contentment": {"count": 4, "value": 16}},
             "aa19": {"w1": 0, "w2": 0, "w3": 4, "w4": 0, "w5": 0, "contentment": {"count": 4, "value": 12}},

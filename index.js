@@ -157,7 +157,7 @@ app.post("/post", function (req, res) {
             }
         });
     });
-    date = new Date();
+    date = new Date().toLocaleString();
     db.postResults(postId, surveyResultNonEscaped, date, function (postResult) {
         sendJsonResult(res, postResult[postId][date]);
     });
